@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscripción Torneo de Quemados · PrepaTec Eugenio Garza Sada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0d0708; --card:#1c0f12; --ink:#f4e3cf; --muted:#b9a08a;
+    --orange:#ff7a18; --orange2:#ffb347; --purple:#7b2cbf; --green:#7fdc6a; --blood:#ff4d4d;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; font-family:'Nunito', Arial, sans-serif; color:var(--ink);
+    background:
+      radial-gradient(circle at 15% 10%, rgba(123,44,191,.35), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(255,122,24,.22), transparent 45%),
+      var(--bg);
+  }
+  main {
+    max-width:780px; margin:40px auto; background:var(--card); border-radius:18px;
+    border:2px solid var(--orange); box-shadow:0 0 0 6px #0d0708, 0 0 40px rgba(255,122,24,.35);
+    overflow:hidden;
+  }
+  header {
+    text-align:center; padding:30px 24px 24px;
+    background:linear-gradient(180deg, #2a1205, var(--card));
+    border-bottom:2px dashed var(--purple);
+  }
+  header .pumpkin { font-size:44px; }
+  header h1 {
+    margin:6px 0 4px; font-family:'Creepster', 'Nunito', cursive; font-weight:400;
+    font-size:46px; letter-spacing:2px; color:var(--orange); text-shadow:0 0 14px rgba(255,122,24,.6);
+  }
+  header p { margin:0; color:var(--muted); font-size:15px; }
+  .tag {
+    display:inline-block; margin-top:12px; padding:4px 12px; border-radius:999px;
+    background:var(--purple); color:#fff; font-size:13px; font-weight:700;
+  }
+  form { padding:22px 28px 30px; }
+  h2 {
+    font-family:'Creepster', cursive; font-weight:400; font-size:26px; letter-spacing:1px;
+    color:var(--orange2); margin:26px 0 12px;
+  }
+  label { display:block; font-size:14px; font-weight:700; color:var(--orange2); margin:0 0 5px; }
+  label small { font-weight:400; color:var(--muted); }
+  input {
+    width:100%; padding:10px 12px; margin-bottom:12px; font:inherit; font-size:15px;
+    color:var(--ink); background:#0d0708; border:1.5px solid #5a2e1a; border-radius:8px;
+  }
+  input::placeholder { color:#6d5a4a; }
+  input:focus { outline:none; border-color:var(--orange); box-shadow:0 0 0 3px rgba(255,122,24,.25); }
+  .grid { display:grid; grid-template-columns: 0.45fr 1.3fr 2.5fr; gap:8px 10px; align-items:center; }
+  .grid .hdr {
+    font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:1px;
+    color:#140707; background:var(--orange); padding:7px 8px; border-radius:6px; text-align:center;
+  }
+  .grid .num { font-family:'Creepster', cursive; font-size:24px; color:var(--purple); text-align:center; }
+  .grid input { margin-bottom:0; padding:9px 10px; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .note { font-size:13px; color:var(--muted); margin:10px 0 0; }
+  .reg-link {
+    display:block; margin:0 0 6px; padding:14px 16px; text-align:center; text-decoration:none;
+    color:var(--ink); font-weight:700; border:1.5px dashed var(--orange); border-radius:10px;
+    background:rgba(255,122,24,.08);
+  }
+  .reg-link:hover { background:rgba(255,122,24,.18); }
+  .reg-link span { color:var(--orange2); }
+  .accept {
+    display:flex; gap:12px; align-items:flex-start; margin-top:22px; padding:14px;
+    border:1px solid #5a2e1a; border-radius:10px; background:#0d0708; font-size:14px; line-height:1.45; cursor:pointer;
+  }
+  .accept input { width:20px; height:20px; margin:2px 0 0; flex-shrink:0; accent-color:var(--orange); }
+  .error {
+    display:none; margin-top:14px; padding:10px 14px; border-radius:8px;
+    background:rgba(255,77,77,.12); border:1px solid var(--blood); color:#ffb0b0; font-weight:700;
+  }
+  button {
+    margin-top:22px; width:100%; padding:15px; font:inherit; font-size:18px; font-weight:900;
+    color:#140707; background:linear-gradient(90deg, var(--orange), var(--orange2));
+    border:none; border-radius:10px; cursor:pointer; letter-spacing:.5px;
+    box-shadow:0 6px 0 #a34a0c, 0 0 22px rgba(255,122,24,.45);
+  }
+  button:hover { filter:brightness(1.08); }
+  button:active { transform:translateY(3px); box-shadow:0 3px 0 #a34a0c; }
+  button:disabled { background:#4a3a33; color:#8a7a6e; box-shadow:none; cursor:not-allowed; }
+  .ok { display:none; text-align:center; padding:50px 28px; }
+  .ok .ghost { font-size:60px; }
+  .ok h2 { color:var(--green); font-size:38px; margin:10px 0; text-shadow:0 0 14px rgba(127,220,106,.5); }
+  .ok p { color:var(--muted); }
+  footer { text-align:center; padding:14px; font-size:13px; color:#7a6555; border-top:1px dashed #3a1f16; }
+  @media (max-width:640px) {
+    .grid { grid-template-columns: 0.4fr 1fr 1.6fr; }
+    .two { grid-template-columns:1fr; }
+    header h1 { font-size:38px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="pumpkin">🎃 🦇 🕸️</div>
+    <h1>Inscripción Torneo de Quemados</h1>
+    <p>Torneo de Quemados Mixto · Eliminación directa · Solo 16 equipos sobrevivirán</p>
+    <span class="tag">Cupo limitado · ¡Antes de que se llene!</span>
+  </header>
+
+  <form id="form" novalidate>
+    <a class="reg-link" href="https://tecmx.sharepoint.com/:b:/s/DEPORTIVOEGS/IQC9zxzkATlOSL5iym8nHsEWAUvEnx3v5i6mlVYhHCUb_OQ?e=OlK3Qw" target="_blank" rel="noopener">
+      📜 <span>Antes de inscribirte, lee el reglamento del juego</span> (PDF)
+    </a>
+
+    <h2>🕯️ Datos del equipo</h2>
+    <label for="equipo">Nombre del equipo</label>
+    <input id="equipo" placeholder="Los Espectros Rojos" required>
+
+    <label for="capitan">Capitán (nombre completo)</label>
+    <input id="capitan" required>
+
+    <label for="telefono">Teléfono de contacto <small>(opcional)</small></label>
+    <input id="telefono" type="tel">
+
+    <label for="correo">Correo electrónico</label>
+    <input id="correo" type="email" required>
+
+    <h2>👻 Integrantes</h2>
+    <p class="note" style="margin:0 0 10px">🦇 Registra <strong>mínimo 5</strong> integrantes. El sexto es opcional.</p>
+    <div class="grid">
+      <div class="hdr">#</div>
+      <div class="hdr">Matrícula</div>
+      <div class="hdr">Nombre completo</div>
+      <div id="rows" style="display:contents"></div>
+    </div>
+    <p class="note">Anota matrícula y nombre tal como aparecen en tu credencial.</p>
+
+    <label class="accept">
+      <input type="checkbox" id="acepta" required>
+      <span>Acepto y confirmo que he leído el reglamento del juego y estoy de acuerdo con el.</span>
+    </label>
+
+    <p class="error" id="error"></p>
+    <button type="submit" id="btn">☠️ Invocar a mi equipo</button>
+  </form>
+
+  <section class="ok" id="ok">
+    <div class="ghost">👻</div>
+    <h2>¡Tu equipo fue invocado!</h2>
+    <p>Inscripción registrada. Guarda este mensaje como comprobante y, si tienes dudas, comunícate con la coordinación del torneo.</p>
+  </section>
+
+  <footer>PrepaTec Eugenio Garza Sada</footer>
+</main>
+
+<script>
+  // ============================================================
+  // PEGA AQUÍ la URL de tu Web App de Google Apps Script (Code.gs)
+  // ============================================================
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwQXic63WIbAcd5MI5SAiWNDe0FJoKNKo-XFE6jZnUKkvQucYxj5vIfHfDaE1FGhWjFtw/exec';
+
+  const MIN_INTEGRANTES = 5;
+  const MAX_INTEGRANTES = 6;
+
+  // Filas 1 a 5 obligatorias; la 6 es opcional
+  const rows = document.getElementById('rows');
+  for (let i = 1; i <= MAX_INTEGRANTES; i++) {
+    const req = i <= MIN_INTEGRANTES ? 'required' : '';
+    rows.insertAdjacentHTML('beforeend', `
+      <div class="num">${i}</div>
+      <div><input name="mat${i}" aria-label="Matrícula ${i}" placeholder="A01234567" ${req}></div>
+      <div><input name="nom${i}" aria-label="Nombre ${i}" placeholder="Nombre Apellido" ${req}></div>`);
+  }
+
+  const form = document.getElementById('form');
+  const err = document.getElementById('error');
+  const btn = document.getElementById('btn');
+
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    err.style.display = 'none';
+
+    if (!form.checkValidity()) {
+      showErr('🕯️ Faltan campos por completar. Revisa los datos marcados.');
+      form.reportValidity();
+      return;
+    }
+
+    // Solo cuentan los integrantes con matrícula y nombre
+    const integrantes = [];
+    for (let i = 1; i <= MAX_INTEGRANTES; i++) {
+      const matricula = form[`mat${i}`].value.trim();
+      const nombre = form[`nom${i}`].value.trim();
+      if (matricula || nombre) integrantes.push({ matricula, nombre });
+    }
+
+    if (integrantes.length < MIN_INTEGRANTES) {
+      showErr(`🦇 Se requieren al menos ${MIN_INTEGRANTES} integrantes para registrar al equipo.`);
+      return;
+    }
+
+    const mats = integrantes.map(x => x.matricula.toUpperCase());
+    if (new Set(mats).size !== mats.length) {
+      showErr('👻 Hay matrículas repetidas entre los integrantes.');
+      return;
+    }
+
+    const payload = {
+      equipo: form.equipo.value.trim(),
+      capitan: form.capitan.value.trim(),
+      telefono: form.telefono.value.trim(),
+      correo: form.correo.value.trim(),
+      acepta: document.getElementById('acepta').checked,
+      integrantes
+    };
+
+    btn.disabled = true;
+    btn.textContent = '🔮 Invocando…';
+    try {
+      // no-cors: Apps Script no devuelve CORS; el envío sí llega a la hoja.
+      await fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      form.style.display = 'none';
+      document.getElementById('ok').style.display = 'block';
+    } catch (e) {
+      showErr('💀 No se pudo enviar. Revisa tu conexión e intenta de nuevo.');
+      btn.disabled = false;
+      btn.textContent = '☠️ Invocar a mi equipo';
+    }
+  });
+
+  function showErr(msg) {
+    err.textContent = msg;
+    err.style.display = 'block';
+  }
+</script>
+</body>
+</html>
